@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/index.ts": {
+      "maxDuration": 30,
+      "includeFiles": "node_modules/better-sqlite3/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api?__path=$1"
+    },
+    {
+      "source": "/((?!api/|src/assets/|assets/|favicon\\.ico).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
